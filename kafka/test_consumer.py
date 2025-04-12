@@ -3,7 +3,7 @@ import json
 
 # Kafka config
 consumer = KafkaConsumer(
-    'deliveries_raw',  # Subscribe to the topic
+    'runs',  # Subscribe to the topic
     bootstrap_servers='localhost:9092',
     value_deserializer=lambda v: json.loads(v.decode('utf-8'))  # Deserialize message
 )
