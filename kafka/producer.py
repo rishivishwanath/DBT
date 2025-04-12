@@ -11,6 +11,7 @@ producer = KafkaProducer(
 
 deliveries_topic = 'deliveries_raw'
 runs_topic = 'runs'
+rate_topic = 'rate'
 csv_file_path = '../data/ipl_2022_deliveries.csv'
 
 # Desired columns for the 'runs' topic
@@ -28,5 +29,10 @@ with open(csv_file_path, 'r') as file:
         producer.send(runs_topic, value=filtered_row)
         print(f"Sent to {runs_topic}: {filtered_row}")
         
-        #time.sleep(0.5)  # simulate streaming
+        # Append 'extras' and send to rate topic
+        filtered_row['extras'] = row['extras']
+        producer.send(rate_topic, value=filtered_row)
+        print(f"Sent to {rate_topic}: {filtered_row}")
+        
+        # time.sleep(0.5)  # simulate streaming
 

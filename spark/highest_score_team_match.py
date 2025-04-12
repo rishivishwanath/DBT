@@ -10,6 +10,7 @@ logging.getLogger("org.apache.spark.sql.execution.streaming.state").setLevel(log
 spark = SparkSession.builder \
     .appName("IPL_Highest_Scorers") \
     .config("spark.sql.streaming.metricsEnabled", "false") \
+    .option("startingOffsets", "latest") \
     .getOrCreate()
 
 # Set log level to reduce verbose output
