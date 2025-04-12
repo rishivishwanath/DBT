@@ -91,6 +91,7 @@ query1 = runrate_by_match.writeStream \
     .format("console") \
     .option("truncate", False) \
     .queryName("Run Rate by Match, Innings, Team") \
+    .trigger(processingTime='5 seconds') \
     .start()
 
 query2 = overall_team_runrate.writeStream \
@@ -105,6 +106,7 @@ query3 = striker_runrate.writeStream \
     .format("console") \
     .option("truncate", False) \
     .queryName("Run Rate per Striker") \
+    .trigger(processingTime='5 seconds') \
     .start()
 
 query4 = powerplay_runrate.writeStream \
